@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34009.444
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DrivingExamScheduler.Web", "DrivingExamScheduler.Web.csproj", "{51B06AAA-EBEF-4B15-A337-80C77D0ECD3E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DrivingExamScheduler.Domain", "..\DrivingExamScheduler.Domain\DrivingExamScheduler.Domain.csproj", "{28136DD7-3208-4D56-8BA5-368788174669}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DrivingExamScheduler", "DrivingExamScheduler", "{051A3A01-28FF-4E9D-A77A-3604C985870B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DrivingExamScheduler.Repository", "..\DrivingExamScheduler.Repository\DrivingExamScheduler.Repository.csproj", "{7FFDA3E1-ECA3-4D61-8F96-A1F18F43BC8B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DrivingExamScheduler.Service", "..\DrivingExamScheduler.Service\DrivingExamScheduler.Service.csproj", "{7590E131-6EEA-4727-9BED-9ADD7D1A0AC7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{51B06AAA-EBEF-4B15-A337-80C77D0ECD3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51B06AAA-EBEF-4B15-A337-80C77D0ECD3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51B06AAA-EBEF-4B15-A337-80C77D0ECD3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51B06AAA-EBEF-4B15-A337-80C77D0ECD3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28136DD7-3208-4D56-8BA5-368788174669}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28136DD7-3208-4D56-8BA5-368788174669}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28136DD7-3208-4D56-8BA5-368788174669}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28136DD7-3208-4D56-8BA5-368788174669}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FFDA3E1-ECA3-4D61-8F96-A1F18F43BC8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FFDA3E1-ECA3-4D61-8F96-A1F18F43BC8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FFDA3E1-ECA3-4D61-8F96-A1F18F43BC8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FFDA3E1-ECA3-4D61-8F96-A1F18F43BC8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7590E131-6EEA-4727-9BED-9ADD7D1A0AC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7590E131-6EEA-4727-9BED-9ADD7D1A0AC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7590E131-6EEA-4727-9BED-9ADD7D1A0AC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7590E131-6EEA-4727-9BED-9ADD7D1A0AC7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{51B06AAA-EBEF-4B15-A337-80C77D0ECD3E} = {051A3A01-28FF-4E9D-A77A-3604C985870B}
+		{28136DD7-3208-4D56-8BA5-368788174669} = {051A3A01-28FF-4E9D-A77A-3604C985870B}
+		{7FFDA3E1-ECA3-4D61-8F96-A1F18F43BC8B} = {051A3A01-28FF-4E9D-A77A-3604C985870B}
+		{7590E131-6EEA-4727-9BED-9ADD7D1A0AC7} = {051A3A01-28FF-4E9D-A77A-3604C985870B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3C38FB14-87EA-44BC-A3D8-696EC908773B}
+	EndGlobalSection
+EndGlobal

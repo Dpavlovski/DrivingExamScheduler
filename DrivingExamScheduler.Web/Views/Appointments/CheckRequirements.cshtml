@@ -1,0 +1,159 @@
+﻿@model IEnumerable<DrivingExamScheduler.Domain.Models.Domain.Appointment>
+
+@{
+    ViewData["Title"] = "CheckRequirements";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Candidate.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Exam.Category.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Exam.ExamType)
+            </th>
+          
+            <th>
+                @Html.DisplayNameFor(model => model.Exam.NumberOfCandidates)
+            </th>
+              <th>
+                @Html.DisplayNameFor(model => model.Candidate.Documents)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MeetsRequirements)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RejectionReason)
+            </th>
+           <th>Action</th>
+          
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedAt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Candidate.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Exam.Category.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Exam.ExamType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Exam.NumberOfCandidates)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Candidate.Documents)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MeetsRequirements)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RejectionReason)
+                </td>
+                <td>
+                    <a href="#" class="download-link" id="download-all-documents-link">Download Candidate Documents</a>
+                <td>
+                    <form asp-action="Approve" asp-route-id="@item.Id">
+                        <button type="submit" class="btn btn-success">Approve</button>
+                    </form>
+                    <form asp-action="Reject" asp-route-id="@item.Id">
+                        <button type="button" class="btn btn-danger mx-1" data-bs-toggle="modal" data-bs-target="#denyModal">Одбиј </button>
+                    </form>
+                   
+                  
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="modal" id="denyModal" tabindex="-1" aria-labelledby="denyModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="denyModalLabel">Reject</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="rejectForm">
+
+                    <div class="mb-3">
+                        <label for="denyReason" class="form-label">Reject Reason:</label>
+                        <textarea class="form-control" id="denyReason" name="rejectionReason" rows="5"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" id="rejectButton" class="btn btn-danger">Reject</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let denyButtons = document.querySelectorAll('[data-bs-target="#denyModal"]');
+
+        denyButtons.forEach(function (button) {
+            button.addEventListener('click', function () {
+                let formAction = button.closest('form').getAttribute('action');
+                document.querySelector('#rejectForm').setAttribute('action', formAction);
+            });
+        });
+
+        // Add a click event to the Reject button to submit the form
+        document.querySelector('#rejectButton').addEventListener('click', function () {
+            document.querySelector('#rejectForm').submit();
+        });
+    });
+</script>
+
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var downloadLink = document.getElementById('download-all-documents-link');
+        downloadLink.addEventListener('click', function (event) {
+            event.preventDefault();
+            downloadAllCandidateDocuments();
+        });
+
+        function downloadAllCandidateDocuments() {
+            fetch('/Documents/DownloadAllCandidateDocuments')
+                .then(function (response) {
+                    return response.blob();
+                })
+                .then(function (blob) {
+                    var url = URL.createObjectURL(blob);
+                    var a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'CandidateDocuments.zip';
+                    a.click();
+                    URL.revokeObjectURL(url);
+                });
+        }
+    });
+</script>
+

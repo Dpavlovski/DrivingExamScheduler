@@ -1,0 +1,71 @@
+﻿@model IEnumerable<DrivingExamScheduler.Domain.Models.Domain.Exam>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExamType)
+            </th>
+            <th>
+                Date&Time
+            </th>
+            <th>
+                Location
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumberOfCandidates)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+           
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.Name)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExamType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TimeSlot.Date)
+            </td>
+                <td>
+                   @Html.DisplayFor(modelItem => item.TimeSlot.Location.Name)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfCandidates)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            
+            <td>
+                <form method="post"  asp-action="Create" asp-controller="Appointments" >
+                    <input name="examId" value="@item.Id" type="hidden">
+                    <button type="submit">Take Exam</button>
+                </form>|
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

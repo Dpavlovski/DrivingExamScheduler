@@ -1,0 +1,83 @@
+﻿@model IEnumerable<DrivingExamScheduler.Domain.Models.Domain.Appointment>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Candidate.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MeetsRequirements)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Exam.TimeSlot.Location.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Exam.TimeSlot.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Exam.Category.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Exam.ExamType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsPaid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Candidate.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MeetsRequirements)
+            </td>
+                <td>
+                @Html.DisplayFor(modelItem => item.Exam.TimeSlot.Location.Name)
+                </td>
+                <td>
+                @Html.DisplayFor(modelItem => item.Exam.TimeSlot.Date)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Exam.Category.Name)
+             </td>
+              <td>
+                @Html.DisplayFor(modelItem => item.Exam.ExamType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsPaid)
+                </td>
+                <th>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </th>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

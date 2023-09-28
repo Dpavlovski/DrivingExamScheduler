@@ -1,0 +1,96 @@
+﻿@model DrivingExamScheduler.Domain.Models.Identity.Candidate
+
+@{
+    ViewData["Title"] = "MyProfile";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <h2>Welcome, @Model.UserName!</h2>
+    <p>Name: @Model.Name</p>
+    <p>Email: @Model.Email</p>
+    <p>Phone: @Model.PhoneNumber</p>
+    <p>EMBG: @Model.EMBG</p>
+    <p>Address: @Model.Address</p>
+    <p>Driving School: @Model.DrivingSchool</p>
+    <p>Age: @Model.Age</p>
+
+    <a asp-action="EditProfile" asp-controller="Account" class="btn btn-primary">Edit Profile</a>
+
+
+    <h3>My Documents</h3>
+
+    @foreach (var document in ViewBag.DocumentTypes)
+    {
+        <h3>@document.Name</h3>
+
+        @if (Model.Documents != null)
+        {
+            var userDocument = Model.Documents.FirstOrDefault(z => z.DocumentTypeId == document.Id);
+
+            @if (userDocument != null)
+            {
+                <p>
+                    Uploaded File:
+                    <a href="#" class="download-link" data-document-id="@userDocument.Id" data-document-name="@userDocument.FileName">@userDocument.FileName</a>
+                </p>
+                <form asp-action="Delete" asp-controller="Documents" method="post">
+                    <input type="hidden" name="Id" value="@userDocument.Id" />
+                    <input type="submit" value="Remove" class="btn btn-danger" />
+                </form>
+
+            }
+            else
+            {
+                <form asp-action="Create" asp-controller="Documents" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label class="control-label">Upload Document</label>
+                        <input type="file" name="file" class="form-control" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">ExpirationDate</label>
+                        <input name="ExpirationDate" type="date" class="form-control" />
+                    </div>
+                    <input name="DocumentTypeId" value="@document.Id" type="hidden" class="form-control" />
+                    <button type="submit" class="btn btn-primary">Upload</button>
+                </form>
+            }
+        }
+    }
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var downloadLinks = document.querySelectorAll('.download-link');
+        downloadLinks.forEach(function (link) {
+            link.addEventListener('click', function (event) {
+                event.preventDefault();
+                var documentId = link.getAttribute('data-document-id');
+                var documentName = link.getAttribute('data-document-name');
+                downloadDocument(documentId, documentName);
+            });
+        });
+
+        function downloadDocument(documentId, documentName) {
+            fetch('/Documents/Download?documentId=' + documentId)
+                .then(function (response) {
+                    return response.blob();
+                })
+                .then(function (blob) {
+                    var url = URL.createObjectURL(blob);
+                    var a = document.createElement('a');
+                    a.href = url;
+
+                    a.download = documentName;
+
+                    a.click();
+                    URL.revokeObjectURL(url);
+                });
+        }
+    });
+</script>
+
+
+

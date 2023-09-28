@@ -1,0 +1,24 @@
+﻿﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<DrivingExamScheduler.Domain.Models.Identity.Candidate> SignInManager
+@inject UserManager<DrivingExamScheduler.Domain.Models.Identity.Candidate> UserManager
+
+<ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Account" asp-action="CandidateProfile" title="Manage">Hello @User.Identity?.Name!</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Account" asp-action="Logout">Logout</a>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Account" asp-action="Register">Register</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Login</a>
+        </li>
+    }
+</ul>
